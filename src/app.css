@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .logo {
+  width: 70px;
+}
+
+.header > ul {
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.header > ul > li {
+  font-size: large;
+  list-style-type: none;
+  text-align: center;
+  width: 200px;
+}

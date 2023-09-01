@@ -4,7 +4,7 @@
   "description": "Food delivery web app made using ReactJS and TailwindCSS",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel index.html"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "parcel": "^2.9.3",
-    "process": "^0.11.10"
+    "postcss": "^8.4.29",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.3.3"
   }
 }

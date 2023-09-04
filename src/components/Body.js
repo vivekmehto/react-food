@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FOOD_URL } from "../constants";
 import Card from "./Card";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -20,7 +21,9 @@ const Body = () => {
     );
   }
 
-  return (
+  return restaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="flex flex-wrap w-[90%] m-auto">
       {restaurants.map((restaurantData) => {
         return <Card restaurantData={restaurantData} />;

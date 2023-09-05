@@ -2,7 +2,6 @@
   "name": "react-food",
   "version": "1.0.0",
   "description": "Food delivery web app made using ReactJS and TailwindCSS",
-  "main": "index.js",
   "scripts": {
     "start": "parcel index.html"
   },

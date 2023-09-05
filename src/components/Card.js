@@ -9,7 +9,7 @@ const Card = ({ restaurantData }) => {
     areaName,
     locality,
     cloudinaryImageId,
-  } = restaurantData.info;
+  } = restaurantData?.info;
   return (
     <div key={id} className="w-[320px] rounded-md p-4 m-2">
       <img

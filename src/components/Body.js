@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { FOOD_URL } from "../constants";
 import Card from "./Card";
-import Shimmer from "./Shimmer";
+import { CardShimmer } from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -13,20 +14,25 @@ const Body = () => {
   async function getRestaurants() {
     const data = await fetch(FOOD_URL);
     const json = await data.json();
-    console.log(
-      json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
-    );
+
     setRestaurants(
       json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
 
   return restaurants.length === 0 ? (
-    <Shimmer />
+    <CardShimmer />
   ) : (
     <div className="flex flex-wrap w-[90%] m-auto">
       {restaurants.map((restaurantData) => {
-        return <Card restaurantData={restaurantData} />;
+        return (
+          <Link
+            to={"/restaurant/" + restaurantData?.info?.id}
+            key={restaurantData?.info?.id}
+          >
+            <Card restaurantData={restaurantData} />
+          </Link>
+        );
       })}
     </div>
   );

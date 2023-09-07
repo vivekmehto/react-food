@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   IMG_URL,
+  MENU_IMG_URL,
   MENU_API,
   MENU_ITEM_TYPE_KEY,
   RESTAURANT_TYPE_KEY,
@@ -61,6 +62,8 @@ const Menu = () => {
       return "red";
     }
   };
+
+  console.log(restaurantMenu);
   return restaurant === null ? (
     <MenuShimmer />
   ) : (
@@ -103,11 +106,13 @@ const Menu = () => {
               <p className="font-semibold text-xl">{item?.name}</p>
 
               <p className="font-light ">{item?.description}</p>
-              <p className="font-medium text-lg">{item?.price}</p>
+              <p className="font-medium text-lg">
+                ₹ {item?.price / 100 || item?.defaultPrice / 100}
+              </p>
             </div>
             <div className="flex flex-col justify-between items-center ">
               <img
-                src={IMG_URL + (item?.imageId || null)}
+                src={MENU_IMG_URL + (item?.imageId || null)}
                 alt={"REACT FOOD " + item?.name}
                 className="w-40 h-40 rounded-lg"
               />

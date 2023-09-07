@@ -20,8 +20,11 @@ const Card = ({ restaurantData }) => {
       <h1 className="font-semibold text-3xl">{name}</h1>
       <h2 className="font-light text-sm">
         {" "}
-        {cuisines.map((i) => (
-          <span className="first:px-0 px-1"> {i + " "}</span>
+        {cuisines.map((i, index) => (
+          <span key={index} className="first:px-0 px-1">
+            {" "}
+            {i + " "}
+          </span>
         ))}
       </h2>
       <div className="flex justify-between">

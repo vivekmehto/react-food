@@ -14,18 +14,26 @@ const Body = () => {
     getRestaurants();
   }, []);
   async function getRestaurants() {
-    const data = await fetch(FOOD_URL);
-    const json = await data.json();
+    try {
+      const data = await fetch(FOOD_URL);
+      const json = await data.json();
 
-    setRestaurants(
-      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilterRestaurants(
-      json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+      setRestaurants(
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+      setFilterRestaurants(
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+    } catch (error) {
+      setFilterRestaurants([]);
+      setRestaurants([]);
+      console.log(error);
+    }
   }
 
-  return restaurants.length <= 0 ? (
+  return restaurants.length === 0 ? (
     <CardShimmer />
   ) : (
     <>

@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   IMG_URL,
-  MENU_IMG_URL,
   MENU_API,
   MENU_ITEM_TYPE_KEY,
   RESTAURANT_TYPE_KEY,
 } from "../constants";
 import { MenuShimmer } from "./Shimmer";
+import RestaurantCategory from "./RestaurantCategory";
 
 const Menu = () => {
   const { resId } = useParams();
   const [restaurant, setRestaurant] = useState(null);
   const [restaurantMenu, setRestaurantMenu] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const [showIndex, setShowIndex] = useState(0);
 
   useEffect(() => {
     getRestaurantMenu();
@@ -46,6 +49,14 @@ const Menu = () => {
           uniqueMenuItems.push(item);
         }
       });
+
+      const categories =
+        json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+          (c) =>
+            c.card?.["card"]?.["@type"] ===
+            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+      setCategories(categories);
       console.log(uniqueMenuItems);
       setRestaurantMenu(uniqueMenuItems);
     } catch (error) {
@@ -95,34 +106,14 @@ const Menu = () => {
           <p className="text-lg">{restaurant?.costForTwoMessage}</p>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        {restaurantMenu.map((item) => (
-          <div
-            key={item.id}
-            className="flex justify-between items-center w-[60%] m-3 p-3"
-          >
-            <div className="w-[60%]">
-              <p>{item?.isVeg ? " 🟢 Veg" : " 🔴 Non-Veg"}</p>
-              <p className="font-semibold text-xl">{item?.name}</p>
-
-              <p className="font-light ">{item?.description}</p>
-              <p className="font-medium text-lg">
-                ₹ {item?.price / 100 || item?.defaultPrice / 100}
-              </p>
-            </div>
-            <div className="flex flex-col justify-between items-center ">
-              <img
-                src={MENU_IMG_URL + (item?.imageId || null)}
-                alt={"REACT FOOD " + item?.name}
-                className="w-40 h-40 rounded-lg"
-              />
-              <button className="border-white bg-red-400 border-solid border-2 rounded-md p-2 m-2">
-                ADD
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      {categories.map((category, index) => (
+        <RestaurantCategory
+          key={category?.card?.card.title}
+          data={category?.card?.card}
+          showItems={index === showIndex}
+          setShowIndex={() => setShowIndex(index)}
+        />
+      ))}
     </div>
   );
 };

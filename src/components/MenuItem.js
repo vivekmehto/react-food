@@ -1,5 +1,9 @@
+import { useDispatch } from "react-redux";
 import { MENU_IMG_URL } from "../constants";
+import { addItem } from "../utils/cartSlice";
 const MenuItem = ({ items }) => {
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => dispatch(addItem(item));
   return (
     <>
       {items.map((item) => (
@@ -24,7 +28,10 @@ const MenuItem = ({ items }) => {
               alt={"REACT FOOD " + item.card.info?.name}
               className="w-40 h-40 rounded-lg"
             />
-            <button className="border-white bg-red-400 border-solid border-2 rounded-md p-2 m-2">
+            <button
+              className="border-white bg-red-400 border-solid border-2 rounded-md p-2 m-2"
+              onClick={() => handleAddItem(item)}
+            >
               ADD
             </button>
           </div>

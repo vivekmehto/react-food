@@ -33,7 +33,6 @@ const Menu = () => {
           ?.info || null;
       setRestaurant(restaurantData);
 
-      console.log(restaurantData);
       const menuItemsData =
         json?.data?.cards
           .find((x) => x.groupedCard)
@@ -57,7 +56,6 @@ const Menu = () => {
             "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
         );
       setCategories(categories);
-      console.log(uniqueMenuItems);
       setRestaurantMenu(uniqueMenuItems);
     } catch (error) {
       setRestaurantMenu([]);
@@ -74,7 +72,6 @@ const Menu = () => {
     }
   };
 
-  console.log(restaurantMenu);
   return restaurant === null ? (
     <MenuShimmer />
   ) : (

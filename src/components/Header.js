@@ -1,6 +1,11 @@
 import logo2 from "../assets/logo2-bg.png";
 import { Link } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa";
+import { useSelector } from "react-redux";
+
 const Header = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+
   return (
     <div className="flex justify-between w-[90%] m-auto">
       <div className="flex justify-center items-center">
@@ -16,6 +21,12 @@ const Header = () => {
         </li>
         <li className="m-6">
           <Link to="/contact">Contact</Link>
+        </li>
+        <li className="m-6">
+          <Link to="/cart">
+            <FaCartPlus className="inline-block" />{" "}
+            <span>{cartItems.length}</span>
+          </Link>
         </li>
       </ul>
 

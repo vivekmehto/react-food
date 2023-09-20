@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Food delivery web app made using ReactJS and TailwindCSS",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,12 @@
     "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "@testing-library/react": "^14.0.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "parcel": "^2.9.3",
     "postcss": "^8.4.29",
     "process": "^0.11.10",
